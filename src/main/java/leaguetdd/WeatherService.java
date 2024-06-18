@@ -21,7 +21,7 @@ public class WeatherService {
 
     public Map<String, Object> getWeather(String city) throws IOException {
         long currentTime = System.currentTimeMillis();
-
+        
         // Check cache first
         if (cache.containsKey(city)) {
             CacheEntry entry = cache.get(city);
@@ -52,7 +52,7 @@ public class WeatherService {
             throw new RuntimeException("HttpResponseCode: " + responseCode);
         } else {
             StringBuilder inline = new StringBuilder();
-            Scanner scanner = new Scanner(url.openStream());
+            Scanner scanner = new Scanner(conn.getInputStream());
 
             while (scanner.hasNext()) {
                 inline.append(scanner.nextLine());
